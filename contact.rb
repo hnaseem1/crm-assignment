@@ -149,17 +149,22 @@ class Contact
 
   # This method should delete all of the contacts
   def self.delete_all
-
+    @@contacts = []
   end
 
   def full_name
-
+    "{@first_name} {@last_name}"
   end
 
   # This method should delete the contact
   # HINT: Check the Array class docs for built-in methods that might be useful here
   def delete
-
+    @@contacts.each do |contact|
+      if contact.id == self.id
+        @@contacts.delete(contact)
+      end
+    end
+    @@contacts
   end
 
   # Feel free to add other methods here, if you need them.
@@ -170,12 +175,12 @@ end
 
 #TESTING DEBUGGING
 
-# contact1 = Contact.create("Hasan", "Naseem", "hn92@live.com", "He is awesome")
-# contact2 = Contact.create("Taha", "Naseem")
-# contact3 = Contact.create("Zain", "Naseem", "zn92@live.com")
-# contact4 = Contact.create("Rubina", "Naseem")
-# contact5 = Contact.create("Aslam", "Naseem")
-# contact6 = Contact.create("Jamshed", "Naseem")
+contact1 = Contact.create("Hasan", "Naseem", "hn92@live.com", "He is awesome")
+contact2 = Contact.create("Taha", "Naseem")
+contact3 = Contact.create("Zain", "Naseem", "zn92@live.com")
+contact4 = Contact.create("Rubina", "Naseem")
+contact5 = Contact.create("Aslam", "Naseem")
+contact6 = Contact.create("Jamshed", "Naseem")
 
 
 # p Contact.all
@@ -187,3 +192,6 @@ end
 # p Contact.find_by("id", 4)
 # p Contact.find_by("firstname", "Zain")
 # p Contact.find_by("note", "He is awesome")
+# p contact2.delete
+# Contact.delete_all
+# p Contact.all
