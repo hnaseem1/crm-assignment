@@ -56,7 +56,7 @@ class Contact
   end
 
 
-
+# CLASS METHODS
 
   # This method should call the initializer,
   # store the newly created contact, and then return it
@@ -83,22 +83,6 @@ class Contact
       end
     end
     temp_contact
-  end
-
-  # This method should allow you to specify
-  # 1. which of the contact's attributes you want to update
-  # 2. the new value for that attribute
-  # and then make the appropriate change to the contact
-  def update(attribute, value)
-    if attribute == "firstname"
-      self.set_first_name = value
-    elsif attribute == "lastname"
-      self.set_last_name = value
-    elsif attribute == "email"
-      self.set_email = value
-    elsif attribute == "note"
-      self.set_note = value
-    end
   end
 
   # This method should work similarly to the find method above
@@ -152,6 +136,8 @@ class Contact
     @@contacts = []
   end
 
+  # INSTANCE METHODS
+
   def full_name
     "{@first_name} {@last_name}"
   end
@@ -167,20 +153,33 @@ class Contact
     @@contacts
   end
 
-  # Feel free to add other methods here, if you need them.
-
+    # This method should allow you to specify
+    # 1. which of the contact's attributes you want to update
+    # 2. the new value for that attribute
+    # and then make the appropriate change to the contact
+    def update(attribute, value)
+      if attribute == "firstname"
+        self.set_first_name = value
+      elsif attribute == "lastname"
+        self.set_last_name = value
+      elsif attribute == "email"
+        self.set_email = value
+      elsif attribute == "note"
+        self.set_note = value
+      end
+    end
 end
 
 
 
 #TESTING DEBUGGING
 
-contact1 = Contact.create("Hasan", "Naseem", "hn92@live.com", "He is awesome")
-contact2 = Contact.create("Taha", "Naseem")
-contact3 = Contact.create("Zain", "Naseem", "zn92@live.com")
-contact4 = Contact.create("Rubina", "Naseem")
-contact5 = Contact.create("Aslam", "Naseem")
-contact6 = Contact.create("Jamshed", "Naseem")
+# contact1 = Contact.create("Hasan", "Naseem", "hn92@live.com", "He is awesome")
+# contact2 = Contact.create("Taha", "Naseem")
+# contact3 = Contact.create("Zain", "Naseem", "zn92@live.com")
+# contact4 = Contact.create("Rubina", "Naseem")
+# contact5 = Contact.create("Aslam", "Naseem")
+# contact6 = Contact.create("Jamshed", "Naseem")
 
 
 # p Contact.all
