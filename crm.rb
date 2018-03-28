@@ -1,3 +1,4 @@
+require './contact.rb'
 class CRM
 
   def initialize
@@ -35,7 +36,7 @@ class CRM
     when 1 then add_new_contact
     when 2 then modify_existing_contact
     when 3 then delete_contact
-    when 4 then display_all_contacts
+    when 4 then display_contacts
     when 5 then search_by_attribute
     when 6 then exit
 
@@ -63,19 +64,92 @@ class CRM
 
   def modify_existing_contact
 
+    #find the instance that needs to be updated
+    #return the full name using
+    #confirms with a Y/N
+    #asks for the new attirbutes
+    #return success
+
+    puts 'Enter ID of the contact: '
+    id = gets.chomp.to_i
+
+    print 'what would you like to change(First name, last name, email or note?): '
+    att = gets.chomp
+    attribute = att.delete(' ').downcase
+
+    print "Enter the new #{att}: "
+    value = gets.chomp
+
+    #Contact.all would return @contacts Array
+    #iterate through @@contacts
+    Contact.all.each do |contact|
+
+      if contact.id == id
+        contact.update(attribute, value)
+        success
+        display_contacts
+
+      end
+    end
+
   end
 
   def delete_contact
 
-  end
+    display_contacts
 
-  def display_all_contacts
+    puts 'Enter ID of the contact: '
+    id = gets.chomp.to_i
+
+    Contact.all.each do |contact|
+      if contact.id == id
+        contact.delete
+        success
+        display_contacts
+      end
+    end
 
   end
 
   def search_by_attribute
 
+    print 'what would you like to find by? (First name, last name, email or note): '
+    att = gets.chomp
+
+    attribute = att.delete(' ').downcase
+    print "Whats the #{att} of the contact you would like to search: "
+    value = gets.chomp
+
+    result = Contact.find_by(attribute, value)
+    if result != "Error 404 - Not Found"
+      puts "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+      puts "------------------------------------------------"
+      puts "| #{result.id} | #{result.full_name} |#{contact.email}  | #{contact.note}"
+      puts "------------------------------------------------"
+      puts "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+    else
+      puts "Error 404 - Not Found"
+      gets.chomp
+    end
+  end
+
+  def display_contacts
+    puts "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+    puts "-----------------------------------------------------------------------------"
+    puts "- ID ------ Name --------- Email ------------------ Note --------------------"
+    Contact.all.each do |contact|
+    puts "| #{contact.id} | #{contact.full_name}   | #{contact.email}  | #{contact.note}"
+    end
+    puts "-----------------------------------------------------------------------------"
+    puts "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+  end
+
+  def success
+    puts "SUCCESSFULLY UPDATED: "
   end
 
 
 end
+
+a = CRM.new
+a.main_menu
