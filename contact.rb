@@ -158,14 +158,19 @@ class Contact
     # 2. the new value for that attribute
     # and then make the appropriate change to the contact
     def update(attribute, value)
+
       if attribute == "firstname"
         self.set_first_name = value
+
       elsif attribute == "lastname"
         self.set_last_name = value
+
       elsif attribute == "email"
         self.set_email = value
+
       elsif attribute == "note"
         self.set_note = value
+
       end
     end
 end
