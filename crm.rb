@@ -69,6 +69,7 @@ class CRM
     #confirms with a Y/N
     #asks for the new attirbutes
     #return success
+    display_contacts
 
     puts 'Enter ID of the contact: '
     id = gets.chomp.to_i
