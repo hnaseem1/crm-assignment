@@ -1,3 +1,4 @@
+gem 'activerecord', '=4.2.7'
 require 'active_record'
 require 'mini_record'
 
@@ -22,12 +23,36 @@ Contact.auto_upgrade!
 
 #TESTING DEBUGGING
 
-# contact1 = Contact.create("Hasan", "Naseem", "hn92@live.com", "He is awesome")
-# contact2 = Contact.create("Taha", "Naseem")
-# contact3 = Contact.create("Zain", "Naseem", "zn92@live.com")
-# contact4 = Contact.create("Rubina", "Naseem")
-# contact5 = Contact.create("Aslam", "Naseem")
-# contact6 = Contact.create("Jamshed", "Naseem")
+# contact1 = Contact.create(
+#   first_name: "Hasan",
+#   last_name: "Naseem",
+#   email: "hn92@live.com",
+#   note: "He is awesome")
+# contact2 = Contact.create(
+#   first_name: "Taha",
+#   last_name: "Naseem",
+#   email: "hn92@live.com",
+#   note: "He is awesome")
+# contact3 = Contact.create(
+#   first_name: "Zain",
+#   last_name: "Naseem",
+#   email: "hn92@live.com",
+#   note: "He is awesome")
+# contact4 = Contact.create(
+#   first_name: "Rubina",
+#   last_name: "Naseem",
+#   email: "hn92@live.com",
+#   note: "He is awesome")
+# contact5 = Contact.create(
+#   first_name: "Hasan",
+#   last_name: "Naseem",
+#   email: "hn92@live.com",
+#   note: "He is awesome")
+# contact6 = Contact.create(
+#   first_name: "Hasan",
+#   last_name: "Naseem",
+#   email: "hn92@live.com",
+#   note: "He is awesome")
 
 
 # p Contact.all

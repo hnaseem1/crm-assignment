@@ -58,7 +58,11 @@ class CRM
   print 'Enter a Note: '
   note = gets.chomp
 
-  Contact.create(first_name, last_name, email, note)
+  Contact.create(
+    first_name: first_name,
+    last_name: last_name,
+    email: email,
+    note: note)
 
   end
 
@@ -74,22 +78,29 @@ class CRM
     puts 'Enter ID of the contact: '
     id = gets.chomp.to_i
 
-    print 'what would you like to change(First name, last name, email or note?): '
-    att = gets.chomp
-    attribute = att.delete(' ').downcase
-
-    print "Enter the new #{att}: "
-    value = gets.chomp
-
     #Contact.all would return @contacts Array
     #iterate through @@contacts
     Contact.all.each do |contact|
 
       if contact.id == id
-        contact.update(attribute, value)
-        success
-        display_contacts
+        print 'New First Name: '
+        first_name = gets.chomp
 
+        print 'New Last Name: '
+        last_name = gets.chomp
+
+        print 'New Email Address: '
+        email = gets.chomp
+
+        print 'New Note: '
+        note = gets.chomp
+
+        contact.update(
+          first_name: first_name,
+          last_name: last_name,
+          email: email,
+          note: note)
+        success
       end
     end
 
@@ -106,7 +117,6 @@ class CRM
       if contact.id == id
         contact.delete
         success
-        display_contacts
       end
     end
 
@@ -114,24 +124,38 @@ class CRM
 
   def search_by_attribute
 
-    print 'what would you like to find by? (First name, last name, email or note): '
-    att = gets.chomp
+    puts '[1] First Name'
+    puts '[2] Last Name'
+    puts '[3] Email'
+    puts '[4] Note'
+    puts 'Enter a number: '
+    input = gets.chomp.to_i
 
-    attribute = att.delete(' ').downcase
-    print "Whats the #{attribute} of the contact you would like to search: "
-    value = gets.chomp
+    if input == 1
+      puts "Enter the First Name: "
+      value = gets.chomp
+      contact = Contact.find_by(first_name: value)
 
-    result = Contact.find_by(attribute, value)
-    if result != "Error 404 - Not Found"
-      puts "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
-      puts "------------------------------------------------"
-      puts "| #{result.id} | #{result.full_name} |#{contact.email}  | #{contact.note}"
-      puts "------------------------------------------------"
-      puts "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
-    else
-      puts "Error 404 - Not Found"
-      gets.chomp
+    elsif input == 2
+      puts "Enter the Last Name: "
+      value = gets.chomp
+      contact = Contact.find_by(last_name: value)
+      display_contact(contact)
+
+    elsif input == 3
+      puts "Enter the Email: "
+      value = gets.chomp
+      contact = Contact.find_by(email: value)
+      display_contact(contact)
+
+    elsif input == 4
+      puts "Enter the Note: "
+      value = gets.chomp
+      contact = Contact.find_by(note: value)
+      display_contact(contact)
+
     end
+
   end
 
   def display_contacts
@@ -139,7 +163,7 @@ class CRM
     puts "-----------------------------------------------------------------------------"
     puts "- ID ------ Name --------- Email ------------------ Note --------------------"
     Contact.all.each do |contact|
-    puts "| #{contact.id} | #{contact.full_name}   | #{contact.email}  | #{contact.note}"
+    puts "|--#{contact.id}-----#{contact.full_name}---#{contact.email}----#{contact.note}--|"
     end
     puts "-----------------------------------------------------------------------------"
     puts "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
@@ -147,6 +171,12 @@ class CRM
 
   def success
     puts "SUCCESSFULLY UPDATED: "
+    puts " "
+    puts "=-=-=-=-=-=-=-=-=-=-=-=-=-="
+  end
+
+  def display_contact(contact)
+    puts "|--#{contact.id}-----#{contact.full_name}---#{contact.email}----#{contact.note}--|"
   end
 end
 
